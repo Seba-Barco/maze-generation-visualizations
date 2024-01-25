@@ -56,16 +56,16 @@ function Cell(i, j) {
       if (this.walls[left]) {
         line(x, y, x, y + cellSize);
       }
-  
+
       // Paint the visited cells.
       if (this.inStack) {
         noStroke();
         fill(255, 255, 255, 100);
-        rect(x, y, cellSize, cellSize);
+        rect(x, y, cellSize);
       } else if (this.visited) {
         noStroke();
-        fill(19, 196, 163, 100);
-        rect(x, y, cellSize, cellSize);
+        fill(0, 255, 255, 100);
+        rect(x, y, cellSize);
       }
     };
   
@@ -75,6 +75,6 @@ function Cell(i, j) {
       var y = this.i * cellSize;
       noStroke();
       fill(0, 0, 255, 100);
-      rect(x, y, cellSize, cellSize);
+      rect(x, y, cellSize);
     };
   }
