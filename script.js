@@ -1,7 +1,5 @@
 // I want to generate the maze based on a seed
-// Objective 2: Generate a round map with round tiles
 
-// Slider
 var columns = 50,
   rows = 50;
 var cellSize = 18;
@@ -14,8 +12,8 @@ var top = 0,
 var stack = [];
 
 function setup() {
+  // Grid creation. Important: i --> vertical axis. j --> horizontal axis
   createCanvas(columns * cellSize, rows * cellSize);
-  // Go through the grid creating Cell objects. If i want to change the axis, i can do it here
   for (i = 0; i < rows; i++) {
     for (j = 0; j < columns; j++) {
       var cell = new Cell(i, j);
@@ -49,12 +47,4 @@ function draw() {
     current = stack.pop();
     current.inStack = false;
   }
-}
-
-function index(i, j) {
-  // Invalid cases
-  if (i < 0 || j < 0 || i > rows - 1 || j > columns - 1) {
-    return -1;
-  }
-  return j + i * columns;
 }

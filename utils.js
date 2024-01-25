@@ -1,3 +1,8 @@
+// --------------------
+// Functions related to Maze Generation Algorithms
+// --------------------
+
+// Takes two Cell objects and deletes the "wall" in between.
 function removeWalls(a, b) {
     var horizontal = a.j - b.j;
     var vertical = a.i - b.i;
@@ -19,3 +24,15 @@ function removeWalls(a, b) {
     }
   }
   
+
+// --------------------
+// Grid Operations
+// --------------------
+
+// Translates 2D coordinates into a 1D array index and checks for invalid cases.
+function index(i, j) {
+    if (i < 0 || j < 0 || i > rows - 1 || j > columns - 1) {
+      return -1;
+    }
+    return j + i * columns;
+  }

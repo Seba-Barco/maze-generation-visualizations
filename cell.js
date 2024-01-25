@@ -3,11 +3,12 @@ function Cell(i, j) {
     this.i = i;
     // Horizontal position
     this.j = j;
-    // Boolean values to enable/disable the walls of each cell in the grid
+    // Enable/disable the walls of each cell in the grid.
     this.walls = [true, true, true, true];
     this.visited = false;
     this.inStack = false;
   
+    // Checks the 4 neighbors of a given Cell, and returns a random unvisited one if possible.
     this.checkNeighbors = function () {
       var neighbors = [
         // top neighbor
@@ -36,7 +37,7 @@ function Cell(i, j) {
       }
     };
   
-    // Rendering logic
+    // Rendering logic.
     this.show = function () {
       var x = this.j * cellSize;
       var y = this.i * cellSize;
@@ -56,7 +57,7 @@ function Cell(i, j) {
         line(x, y, x, y + cellSize);
       }
   
-      // paint the visited cells
+      // Paint the visited cells.
       if (this.inStack) {
         noStroke();
         fill(255, 255, 255, 100);
@@ -68,7 +69,7 @@ function Cell(i, j) {
       }
     };
   
-    // Highlight the current cell
+    // Highlight the current cell.
     this.highlight = function () {
       var x = this.j * cellSize;
       var y = this.i * cellSize;
