@@ -21,28 +21,15 @@ function Cell(i, j) {
     return grid[index(i, j - 1)];
   };
 
-  // Checks the 4 neighbors of a given Cell, and returns a random unvisited one if possible.
-  this.checkNeighbors = function () {
-    var neighbors = [
+  // Returns the 4 neighbors
+  this.getNeighbors = function () {
+    return [
       this.getTopNeighbor(),
       this.getRightNeighbor(),
       this.getBottomNeighbor(),
       this.getLeftNeighbor(),
     ];
-
-    var notVisited = [];
-
-    for (k = 0; k < neighbors.length; k++) {
-      if (neighbors[k] && !neighbors[k].visited) {
-        notVisited.push(neighbors[k]);
-      }
-    }
-
-    if (notVisited.length > 0) {
-      var r = floor(random(0, notVisited.length));
-      return notVisited[r];
-    }
-  };
+  }
 
   this.selectRightOrBottom = function () {
     //console.log(grid[index(i, j + 1)]);
