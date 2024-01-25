@@ -1,4 +1,5 @@
-/*  1. Make the initial cell the current cell and mark it as visited
+/* Randomized Depth-First Search
+  1. Make the initial cell the current cell and mark it as visited
     2. While there are unvisited cells
         2.1 If the current cell has any neighors which have not been visited
             2.1.1 Choose randomly one of the unvisited neighbors
@@ -10,7 +11,7 @@
             2.2.2 Make it the current cell
 */
 function randomizedDepthFirstSearch() {
-    // Step 1
+  // Step 1
   current.visited = true;
   current.highlight();
   // Step 2
@@ -32,3 +33,25 @@ function randomizedDepthFirstSearch() {
     current.inStack = false;
   }
 }
+
+/* Binary Tree
+    1. For every cell in the grid, randomly carve a passage either north or west.
+*/
+function binaryTree() {
+  if (ii < columns * rows) {
+    ii++;
+  }
+  current.highlight();
+  current.visited = true;
+  //console.log(ii);
+  var otherCell = current.selectRightOrBottom();
+  //console.log(otherCell);
+  if (otherCell) {
+    removeWalls(current, otherCell);
+
+    
+  }
+  current = grid[ii-1];
+}
+
+// To do: Make the algorithms stop executing when the maze is complete
