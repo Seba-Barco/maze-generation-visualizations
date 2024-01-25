@@ -20,6 +20,7 @@ function setup() {
       grid.push(cell);
     }
   }
+  // This will be the selected cell to start
   current = grid[0];
   //frameRate(5);
 }
@@ -29,22 +30,6 @@ function draw() {
   for (var k = 0; k < grid.length; k++) {
     grid[k].show();
   }
-  // Pick a random neighbor
-  current.visited = true;
-  current.highlight();
-  var next = current.checkNeighbors();
-  if (next) {
-    next.visited = true;
-    // Step 2
-    stack.push(current);
-    current.inStack = true;
-    // Remove walls between cells
-    removeWalls(current, next);
-
-    // make the selected not visited cell the next one
-    current = next;
-  } else if (stack.length > 0) {
-    current = stack.pop();
-    current.inStack = false;
-  }
+  
+  randomizedDepthFirstSearch();
 }
