@@ -11,7 +11,7 @@
             2.2.2 Make it the current cell
 */
 function randomizedDepthFirstSearch() {
-  // Step 1
+  // Step 1 --> In setup code
   current.visited = true;
   current.highlight();
   // Step 2

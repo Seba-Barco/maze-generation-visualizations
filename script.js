@@ -32,7 +32,7 @@ function draw() {
     grid[k].show();
   }
 
-  binaryTree();
+  //binaryTree();
 
-  //randomizedDepthFirstSearch();
+  randomizedDepthFirstSearch();
 }

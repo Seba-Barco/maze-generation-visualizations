@@ -8,17 +8,26 @@ function Cell(i, j) {
   this.visited = false;
   this.inStack = false;
 
+  this.getTopNeighbor = function () {
+    return grid[index(i - 1, j)];
+  };
+  this.getRightNeighbor = function () {
+    return grid[index(i, j + 1)];
+  };
+  this.getBottomNeighbor = function () {
+    return grid[index(i + 1, j)];
+  };
+  this.getLeftNeighbor = function () {
+    return grid[index(i, j - 1)];
+  };
+
   // Checks the 4 neighbors of a given Cell, and returns a random unvisited one if possible.
   this.checkNeighbors = function () {
     var neighbors = [
-      // top neighbor
-      grid[index(i - 1, j)],
-      // right neighbor
-      grid[index(i, j + 1)],
-      // bottom neighbor
-      grid[index(i + 1, j)],
-      // left neighbor
-      grid[index(i, j - 1)],
+      this.getTopNeighbor(),
+      this.getRightNeighbor(),
+      this.getBottomNeighbor(),
+      this.getLeftNeighbor(),
     ];
 
     var notVisited = [];
@@ -32,18 +41,14 @@ function Cell(i, j) {
     if (notVisited.length > 0) {
       var r = floor(random(0, notVisited.length));
       return notVisited[r];
-    } else {
-      return undefined;
     }
   };
 
   this.selectRightOrBottom = function () {
     //console.log(grid[index(i, j + 1)]);
     var rightBottom = [
-      // right neighbor
-      grid[index(i, j + 1)],
-      // bottom neighbor
-      grid[index(i + 1, j)]
+      this.getRightNeighbor(),
+      this.getBottomNeighbor()
     ];
 
     var select = [];
