@@ -61,7 +61,17 @@ function binaryTree() {
   current.highlight();
   current.visited = true;
   //console.log(ii);
-  var otherCell = current.selectRightOrBottom();
+  var rbNeighbors = [current.getRightNeighbor(), current.getBottomNeighbor()];
+  var select = [];
+
+  for (var kk = 0; kk < rbNeighbors.length; kk++) {
+    if (rbNeighbors[kk]) {
+      select.push(rbNeighbors[kk]);
+    }
+  }
+
+  otherCell = select[floor(random(0, select.length))];
+
   //console.log(otherCell);
   if (otherCell) {
     removeWalls(current, otherCell);

@@ -31,24 +31,6 @@ function Cell(i, j) {
     ];
   }
 
-  this.selectRightOrBottom = function () {
-    //console.log(grid[index(i, j + 1)]);
-    var rightBottom = [
-      this.getRightNeighbor(),
-      this.getBottomNeighbor()
-    ];
-
-    var select = [];
-
-    for (var kk = 0; kk < rightBottom.length; kk++) {
-      if (rightBottom[kk]) {
-        select.push(rightBottom[kk]);
-      }
-    }
-
-    return select[floor(random(0, select.length))];
-  };
-
   // Rendering logic.
   this.show = function () {
     var x = this.j * cellSize;
