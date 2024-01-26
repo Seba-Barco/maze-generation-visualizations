@@ -1,4 +1,5 @@
 // I want to generate the maze based on a seed
+let selectedAlgorithm = null;
 
 function setup() {
   // Grid creation. Important: i --> vertical axis. j --> horizontal axis
@@ -21,7 +22,37 @@ function draw() {
   }
 
   if (!mazeComplete) {
-    //binaryTree();
-    randomizedDepthFirstSearch();
+    if (selectedAlgorithm === 'randomizedDFS') {
+      randomizedDepthFirstSearch();
+    } else if (selectedAlgorithm === 'binaryTree') {
+      binaryTree();
+    }
   }
 }
+
+function clearGrid(){
+  let i;
+  for(i = 0; i < grid.length ; i++){
+    grid[i].visited = false;
+    grid[i].inStack = false;
+    grid[i].walls = [true, true, true, true];
+  }
+  current = grid[0];
+  mazeComplete = false;
+  stack = [];
+}
+
+// Function to set the algorithm
+function selectAlgorithm(algorithm) {
+  clearGrid();
+  selectedAlgorithm = algorithm;
+}
+
+// Add event listeners to buttons
+document.getElementById('randomizedDFSButton').addEventListener('click', function() {
+  selectAlgorithm('randomizedDFS');
+});
+
+document.getElementById('binaryTreeButton').addEventListener('click', function() {
+  selectAlgorithm('binaryTree');
+});
