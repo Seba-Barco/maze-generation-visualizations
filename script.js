@@ -11,6 +11,7 @@ var top = 0,
   left = 3;
 var stack = [];
 var ii = 0;
+var mazeComplete = false;
 
 function setup() {
   // Grid creation. Important: i --> vertical axis. j --> horizontal axis
@@ -32,7 +33,8 @@ function draw() {
     grid[k].show();
   }
 
-  binaryTree();
-
-  //randomizedDepthFirstSearch();
+  if (!mazeComplete) {
+    //binaryTree();
+    randomizedDepthFirstSearch();
+  }
 }

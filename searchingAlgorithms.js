@@ -49,6 +49,9 @@ function randomizedDepthFirstSearch() {
     current = stack.pop();
     current.inStack = false;
   }
+  else{
+    mazeComplete = true;
+  }
 }
 
 /* Binary Tree
@@ -57,6 +60,9 @@ function randomizedDepthFirstSearch() {
 function binaryTree() {
   if (ii < columns * rows) {
     ii++;
+  }
+  else{
+    mazeComplete = true;
   }
   current.highlight();
   current.visited = true;
@@ -71,6 +77,6 @@ function binaryTree() {
     removeWalls(current, otherCell);
   }
   current = grid[ii - 1];
+  console.log("Hola");
 }
 
-// To do: Make the algorithms stop executing when the maze is complete
