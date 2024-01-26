@@ -48,8 +48,7 @@ function randomizedDepthFirstSearch() {
     // Step 2.2.1 & 2.2.2
     current = stack.pop();
     current.inStack = false;
-  }
-  else{
+  } else {
     mazeComplete = true;
   }
 }
@@ -58,25 +57,22 @@ function randomizedDepthFirstSearch() {
     1. For every cell in the grid, randomly carve a passage either north or west.
 */
 function binaryTree() {
-  if (ii < columns * rows) {
-    ii++;
-  }
-  else{
-    mazeComplete = true;
-  }
+  var currentIndex = grid.indexOf(current);
+
   current.highlight();
   current.visited = true;
 
-  // Get the right and bottom neighbors and
-  var rbNeighbors = [current.getRightNeighbor(), current.getBottomNeighbor()];
-  rbNeighbors = rbNeighbors.filter(neighbor => neighbor !== undefined);
+  if (currentIndex < columns * rows - 1) {
+    var rbNeighbors = [current.getRightNeighbor(), current.getBottomNeighbor()];
+    rbNeighbors = rbNeighbors.filter((neighbor) => neighbor !== undefined);
 
-  otherCell = rbNeighbors[floor(random(0, rbNeighbors.length))];
+    var otherCell = rbNeighbors[floor(random(0, rbNeighbors.length))];
+    if (otherCell) {
+      removeWalls(current, otherCell);
+    }
 
-  if (otherCell) {
-    removeWalls(current, otherCell);
+    current = grid[currentIndex + 1];
+  } else {
+    mazeComplete = true;
   }
-  current = grid[ii - 1];
-  console.log("Hola");
 }
-
