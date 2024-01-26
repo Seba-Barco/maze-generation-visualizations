@@ -1,17 +1,5 @@
 // I want to generate the maze based on a seed
 
-var columns = 6,
-  rows = 6;
-var cellSize = 40;
-var grid = [];
-var current;
-var top = 0,
-  right = 1,
-  bottom = 2,
-  left = 3;
-var stack = [];
-var mazeComplete = false;
-
 function setup() {
   // Grid creation. Important: i --> vertical axis. j --> horizontal axis
   createCanvas(columns * cellSize, rows * cellSize);
@@ -33,7 +21,7 @@ function draw() {
   }
 
   if (!mazeComplete) {
-    binaryTree();
-    //randomizedDepthFirstSearch();
+    //binaryTree();
+    randomizedDepthFirstSearch();
   }
 }
