@@ -60,19 +60,13 @@ function binaryTree() {
   }
   current.highlight();
   current.visited = true;
-  //console.log(ii);
+
+  // Get the right and bottom neighbors and
   var rbNeighbors = [current.getRightNeighbor(), current.getBottomNeighbor()];
-  var select = [];
+  rbNeighbors = rbNeighbors.filter(neighbor => neighbor !== undefined);
 
-  for (var kk = 0; kk < rbNeighbors.length; kk++) {
-    if (rbNeighbors[kk]) {
-      select.push(rbNeighbors[kk]);
-    }
-  }
+  otherCell = rbNeighbors[floor(random(0, rbNeighbors.length))];
 
-  otherCell = select[floor(random(0, select.length))];
-
-  //console.log(otherCell);
   if (otherCell) {
     removeWalls(current, otherCell);
   }
