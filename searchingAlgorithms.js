@@ -76,3 +76,7 @@ function binaryTree() {
     mazeComplete = true;
   }
 }
+
+function huntAndKill() {
+  console.log("Hunt and Kill");
+}

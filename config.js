@@ -1,7 +1,7 @@
 // Grid
-var columns = 8;
-var rows = 8;
-var cellSize = 60;
+var columns = 40;
+var rows = 40;
+var cellSize = 20;
 var grid = [];
 
 // Cell

@@ -26,6 +26,8 @@ function draw() {
       randomizedDepthFirstSearch();
     } else if (selectedAlgorithm === "binaryTree") {
       binaryTree();
+    } else if (selectedAlgorithm === "huntAndKill") {
+      huntAndKill();
     }
   }
 }
@@ -41,4 +43,10 @@ document
   .getElementById("binaryTreeButton")
   .addEventListener("click", function () {
     selectAlgorithm("binaryTree");
+  });
+
+document
+  .getElementById("huntAndKillButton")
+  .addEventListener("click", function () {
+    selectAlgorithm("huntAndKill");
   });
