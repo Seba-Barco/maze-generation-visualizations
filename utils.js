@@ -22,7 +22,6 @@ function removeWalls(a, b) {
   }
 }
 
-
 // --------------------
 // Grid Operations
 // --------------------
@@ -33,6 +32,50 @@ function index(i, j) {
     return -1;
   }
   return j + i * columns;
+}
+
+// --------------------
+// Rendering Logic
+// --------------------
+
+function showCell(cell) {
+  var x = cell.j * cellSize;
+  var y = cell.i * cellSize;
+  stroke(255);
+
+  // Draw the border lines for the cells
+  if (cell.walls[top]) {
+    line(x, y, x + cellSize, y);
+  }
+  if (cell.walls[right]) {
+    line(x + cellSize, y, x + cellSize, y + cellSize);
+  }
+  if (cell.walls[bottom]) {
+    line(x, y + cellSize, x + cellSize, y + cellSize);
+  }
+  if (cell.walls[left]) {
+    line(x, y, x, y + cellSize);
+  }
+
+  // Paint the visited cells.
+  if (cell.inStack) {
+    noStroke();
+    fill(255, 255, 255, 100);
+    rect(x, y, cellSize);
+  } else if (cell.visited) {
+    noStroke();
+    fill(0, 255, 255, 100);
+    rect(x, y, cellSize);
+  }
+}
+
+// Highlight the current cell.
+function highlight(cell) {
+  var x = cell.j * cellSize;
+  var y = cell.i * cellSize;
+  noStroke();
+  fill(0, 0, 255, 100);
+  rect(x, y, cellSize);
 }
 
 function clearGrid() {
@@ -46,7 +89,6 @@ function clearGrid() {
   mazeComplete = false;
   stack = [];
 }
-
 
 // --------------------
 // Frontend Functions

@@ -29,46 +29,5 @@ function Cell(i, j) {
       this.getBottomNeighbor(),
       this.getLeftNeighbor(),
     ];
-  }
-
-  // Rendering logic.
-  this.show = function () {
-    var x = this.j * cellSize;
-    var y = this.i * cellSize;
-    stroke(255);
-
-    // Draw the border lines for the cells
-    if (this.walls[top]) {
-      line(x, y, x + cellSize, y);
-    }
-    if (this.walls[right]) {
-      line(x + cellSize, y, x + cellSize, y + cellSize);
-    }
-    if (this.walls[bottom]) {
-      line(x, y + cellSize, x + cellSize, y + cellSize);
-    }
-    if (this.walls[left]) {
-      line(x, y, x, y + cellSize);
-    }
-
-    // Paint the visited cells.
-    if (this.inStack) {
-      noStroke();
-      fill(255, 255, 255, 100);
-      rect(x, y, cellSize);
-    } else if (this.visited) {
-      noStroke();
-      fill(0, 255, 255, 100);
-      rect(x, y, cellSize);
-    }
-  };
-
-  // Highlight the current cell.
-  this.highlight = function () {
-    var x = this.j * cellSize;
-    var y = this.i * cellSize;
-    noStroke();
-    fill(0, 0, 255, 100);
-    rect(x, y, cellSize);
   };
 }

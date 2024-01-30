@@ -15,7 +15,7 @@ function randomizedDepthFirstSearch() {
   // Step 1 --> In setup code
   // Step 1.1
   current.visited = true;
-  current.highlight();
+  highlight(current);
   // Step 2
   // Step 2.1 & 2.1.1
   var neighbors = current.getNeighbors();
@@ -59,7 +59,7 @@ function randomizedDepthFirstSearch() {
 function binaryTree() {
   var currentIndex = grid.indexOf(current);
 
-  current.highlight();
+  highlight(current);
   current.visited = true;
 
   if (currentIndex < columns * rows - 1) {

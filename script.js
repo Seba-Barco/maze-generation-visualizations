@@ -18,23 +18,27 @@ function setup() {
 function draw() {
   background(51);
   for (var k = 0; k < grid.length; k++) {
-    grid[k].show();
+    showCell(grid[k]);
   }
 
   if (!mazeComplete) {
-    if (selectedAlgorithm === 'randomizedDFS') {
+    if (selectedAlgorithm === "randomizedDFS") {
       randomizedDepthFirstSearch();
-    } else if (selectedAlgorithm === 'binaryTree') {
+    } else if (selectedAlgorithm === "binaryTree") {
       binaryTree();
     }
   }
 }
 
 // Add event listeners to buttons
-document.getElementById('randomizedDFSButton').addEventListener('click', function() {
-  selectAlgorithm('randomizedDFS');
-});
+document
+  .getElementById("randomizedDFSButton")
+  .addEventListener("click", function () {
+    selectAlgorithm("randomizedDFS");
+  });
 
-document.getElementById('binaryTreeButton').addEventListener('click', function() {
-  selectAlgorithm('binaryTree');
-});
+document
+  .getElementById("binaryTreeButton")
+  .addEventListener("click", function () {
+    selectAlgorithm("binaryTree");
+  });
