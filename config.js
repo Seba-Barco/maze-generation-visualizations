@@ -1,6 +1,6 @@
 // Grid
-var columns = 10;
-var rows = 10;
+var columns = 20;
+var rows = 20;
 var cellSize = 40;
 var grid = [];
 

@@ -28,6 +28,7 @@ function removeWalls(a, b) {
 
 // Translates 2D coordinates into a 1D array index and checks for invalid cases.
 function index(i, j) {
+  // Invalid cases
   if (i < 0 || j < 0 || i > rows - 1 || j > columns - 1) {
     return -1;
   }
@@ -88,6 +89,7 @@ function clearGrid() {
   current = grid[0];
   mazeComplete = false;
   stack = [];
+  indiceHK = 0;
 }
 
 // --------------------

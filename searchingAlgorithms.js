@@ -21,7 +21,7 @@ function randomizedDepthFirstSearch() {
   let next = current.getRandomNeighbor();
 
   if (next) {
-    next.visited = true;
+    //next.visited = true;
     // Step 2.1.2
     stack.push(current);
     current.inStack = true;
@@ -39,25 +39,44 @@ function randomizedDepthFirstSearch() {
   }
 }
 
-function huntAndKill() {
-  console.log("Hunt and Kill");
+var indiceHK = 0;
 
+function huntAndKill() {
+  // Choose a Starting location (in setup)
+  current.visited = true;
+  highlight(current);
+  let next = current.getRandomNeighbor();
+  // Perform a random walk, carving passages to unvisited neighbors,
+  // until the current cell has no unvisited neighbors
+  if (next) {
+    //next.visited = true;
+    removeWalls(current, next);
+    current = next;
+  } else {
+    // Enter hunt mode
+    if (indiceHK < rows * columns) {
+      current = grid[indiceHK];
+      indiceHK++;
+    } else {
+      mazeComplete = true;
+    }
+  }
 }
 
 /* Binary Tree
     1. For every cell in the grid, randomly carve a passage either north or west.
 */
 function binaryTree() {
-  var currentIndex = grid.indexOf(current);
+  let currentIndex = grid.indexOf(current);
 
   highlight(current);
   current.visited = true;
 
   if (currentIndex < columns * rows - 1) {
-    var rbNeighbors = [current.getRightNeighbor(), current.getBottomNeighbor()];
+    let rbNeighbors = [current.getRightNeighbor(), current.getBottomNeighbor()];
     rbNeighbors = rbNeighbors.filter((neighbor) => neighbor !== undefined);
 
-    var otherCell = rbNeighbors[floor(random(0, rbNeighbors.length))];
+    let otherCell = rbNeighbors[floor(random(0, rbNeighbors.length))];
     if (otherCell) {
       removeWalls(current, otherCell);
     }
