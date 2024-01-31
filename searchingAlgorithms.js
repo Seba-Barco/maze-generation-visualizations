@@ -18,21 +18,7 @@ function randomizedDepthFirstSearch() {
   highlight(current);
   // Step 2
   // Step 2.1 & 2.1.1
-  var neighbors = current.getNeighbors();
-  var notVisited = [];
-
-  for (k = 0; k < neighbors.length; k++) {
-    if (neighbors[k] && !neighbors[k].visited) {
-      notVisited.push(neighbors[k]);
-    }
-  }
-
-  if (notVisited.length > 0) {
-    var r = floor(random(0, notVisited.length));
-    next = notVisited[r];
-  } else {
-    next = undefined;
-  }
+  let next = current.getRandomNeighbor();
 
   if (next) {
     next.visited = true;
@@ -51,6 +37,11 @@ function randomizedDepthFirstSearch() {
   } else {
     mazeComplete = true;
   }
+}
+
+function huntAndKill() {
+  console.log("Hunt and Kill");
+
 }
 
 /* Binary Tree
@@ -75,8 +66,4 @@ function binaryTree() {
   } else {
     mazeComplete = true;
   }
-}
-
-function huntAndKill() {
-  console.log("Hunt and Kill");
 }

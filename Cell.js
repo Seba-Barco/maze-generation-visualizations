@@ -30,4 +30,21 @@ function Cell(i, j) {
       this.getLeftNeighbor(),
     ];
   };
+
+  this.getRandomNeighbor = function () {
+    let neighbors = this.getNeighbors();
+    let notVisited = [];
+    let ind;
+
+    for (ind = 0; ind < neighbors.length; ind++) {
+      if (neighbors[ind] && !neighbors[ind].visited) {
+        notVisited.push(neighbors[ind]);
+      }
+    }
+
+    if (notVisited.length > 0) {
+      let r = floor(random(0, notVisited.length));
+      return notVisited[r];
+    }
+  };
 }
