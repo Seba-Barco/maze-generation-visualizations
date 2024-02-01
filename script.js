@@ -28,6 +28,8 @@ function draw() {
       binaryTree();
     } else if (selectedAlgorithm === "huntAndKill") {
       huntAndKill();
+    } else if (selectedAlgorithm === "growingTree") {
+      growingTree();
     }
   }
 }
@@ -49,4 +51,10 @@ document
   .getElementById("huntAndKillButton")
   .addEventListener("click", function () {
     selectAlgorithm("huntAndKill");
+  });
+
+document
+  .getElementById("growingTreeButton")
+  .addEventListener("click", function () {
+    selectAlgorithm("growingTree");
   });

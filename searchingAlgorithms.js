@@ -86,3 +86,7 @@ function binaryTree() {
     mazeComplete = true;
   }
 }
+
+function growingTree (){
+  console.log("It works");
+}
