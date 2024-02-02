@@ -39,30 +39,6 @@ function randomizedDepthFirstSearch() {
   }
 }
 
-var indiceHK = 0;
-
-function huntAndKill() {
-  // Choose a Starting location (in setup)
-  current.visited = true;
-  highlight(current);
-  let next = current.getRandomNeighbor();
-  // Perform a random walk, carving passages to unvisited neighbors,
-  // until the current cell has no unvisited neighbors
-  if (next) {
-    //next.visited = true;
-    removeWalls(current, next);
-    current = next;
-  } else {
-    // Enter hunt mode
-    if (indiceHK < rows * columns) {
-      current = grid[indiceHK];
-      indiceHK++;
-    } else {
-      mazeComplete = true;
-    }
-  }
-}
-
 /* Binary Tree
     1. For every cell in the grid, randomly carve a passage either north or west.
 */
@@ -84,6 +60,30 @@ function binaryTree() {
     current = grid[currentIndex + 1];
   } else {
     mazeComplete = true;
+  }
+}
+
+var indiceHK = 0;
+
+function huntAndKill() {
+  // Choose a Starting location (in setup)
+  current.visited = true;
+  highlight(current);
+  let next = current.getRandomNeighbor();
+  // Perform a random walk, carving passages to unvisited neighbors,
+  // until the current cell has no unvisited neighbors
+  if (next) {
+    //next.visited = true;
+    removeWalls(current, next);
+    current = next;
+  } else {
+    // Enter hunt mode
+    if (indiceHK < rows * columns) {
+      current = grid[indiceHK];
+      indiceHK++;
+    } else {
+      mazeComplete = true;
+    }
   }
 }
 
