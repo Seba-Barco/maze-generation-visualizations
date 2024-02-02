@@ -87,6 +87,23 @@ function binaryTree() {
   }
 }
 
-function growingTree (){
-  console.log("It works");
+function growingTreeLast() {
+  current.visited = true;
+  highlight(current);
+
+  if (current.getRandomNeighbor()) {
+    let neighbor = current.getRandomNeighbor();
+    removeWalls(current, neighbor);
+    stack.push(neighbor);
+    neighbor.inStack = true;
+    neighbor.visited = true;
+  } else {
+    let next = stack.pop();
+    next.inStack = false;
+
+    current = next;
+  }
+  if (stack.length == 0) {
+    mazeComplete = true;
+  }
 }

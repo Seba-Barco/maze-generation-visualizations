@@ -28,8 +28,8 @@ function draw() {
       binaryTree();
     } else if (selectedAlgorithm === "huntAndKill") {
       huntAndKill();
-    } else if (selectedAlgorithm === "growingTree") {
-      growingTree();
+    } else if (selectedAlgorithm === "growingTreeLast") {
+      growingTreeLast();
     }
   }
 }
@@ -54,7 +54,7 @@ document
   });
 
 document
-  .getElementById("growingTreeButton")
+  .getElementById("growingTreeLastButton")
   .addEventListener("click", function () {
-    selectAlgorithm("growingTree");
+    selectAlgorithm("growingTreeLast");
   });
