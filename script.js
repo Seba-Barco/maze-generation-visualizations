@@ -30,6 +30,8 @@ function draw() {
       huntAndKill();
     } else if (selectedAlgorithm === "growingTreeLast") {
       growingTreeLast();
+    } else if (selectedAlgorithm === "growingTreeRandom") {
+      growingTreeRandom();
     }
   }
 }
@@ -57,4 +59,10 @@ document
   .getElementById("growingTreeLastButton")
   .addEventListener("click", function () {
     selectAlgorithm("growingTreeLast");
+  });
+
+  document
+  .getElementById("growingTreeRandomButton")
+  .addEventListener("click", function () {
+    selectAlgorithm("growingTreeRandom");
   });

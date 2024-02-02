@@ -107,3 +107,26 @@ function growingTreeLast() {
     mazeComplete = true;
   }
 }
+
+function growingTreeRandom() {
+  current.visited = true;
+  highlight(current);
+
+  if (current.getRandomNeighbor()) {
+    neighbor = current.getRandomNeighbor();
+    removeWalls(current, neighbor);
+    stack.push(neighbor);
+    neighbor.inStack = true;
+    neighbor.visited = true;
+  } else {
+    let r = floor(random(0,stack.length));
+    next = stack[r];
+    stack.splice(r,1);
+    next.inStack = false;
+
+    current = next;
+  }
+  if (stack.length == 0) {
+    mazeComplete = true;
+  }
+}
