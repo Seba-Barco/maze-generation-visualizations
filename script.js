@@ -32,6 +32,9 @@ function draw() {
       growingTreeLast();
     } else if (selectedAlgorithm === "growingTreeRandom") {
       growingTreeRandom();
+      // Clear Grid Option
+    }  else if (selectedAlgorithm === "clearGrid") {
+      clearGrid();
     }
   }
 }
@@ -66,3 +69,12 @@ document
   .addEventListener("click", function () {
     selectAlgorithm("growingTreeRandom");
   });
+
+  // Clear Grid Button
+
+  document
+  .getElementById("clearGridButton")
+  .addEventListener("click", function () {
+    selectAlgorithm("clearGrid");
+  });
+  
