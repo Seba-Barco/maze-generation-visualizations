@@ -1,8 +1,10 @@
 // Grid
 var columns = 30;
 var rows = 30;
-var cellSize = 20;
+var cellSize = 25;
 var grid = [];
+var shadingTime = 1200;
+var highlightTracker = [];
 
 // Cell
 var topWall = 0;

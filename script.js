@@ -1,10 +1,11 @@
 // I want to generate the maze based on a seed
-let selectedAlgorithm = null;
-let selectedAlgorithm2 = null;
+var selectedAlgorithm = null;
+var selectedAlgorithm2 = null;
+let playing = true;
 
 function setup() {
   // Grid creation. Important: i --> vertical axis. j --> horizontal axis
-  createCanvas(columns * cellSize +1, rows * cellSize +1);
+  createCanvas(columns * cellSize + 1, rows * cellSize + 1);
   for (i = 0; i < rows; i++) {
     for (j = 0; j < columns; j++) {
       var cell = new Cell(i, j);
@@ -18,12 +19,11 @@ function setup() {
 
 function draw() {
   background(51);
+
+  updateAndRenderHighlights();
+
   for (var k = 0; k < grid.length; k++) {
     showCell(grid[k]);
-  }
-
-  if (selectedAlgorithm2 === "removeRandomWall") {
-    removeRandomWall();
   }
 
   if (!mazeComplete) {
@@ -40,6 +40,12 @@ function draw() {
       // Clear Grid Option
     } else if (selectedAlgorithm === "clearGrid") {
       clearGrid();
+    }
+    selectedAlgorithm2 = null;
+  } else {
+    // Only remove walls if the maze is complete
+    if (selectedAlgorithm2 === "removeRandomWall") {
+      removeRandomWall();
     }
   }
 }
@@ -88,4 +94,15 @@ document
   .getElementById("removeRandomWallButton")
   .addEventListener("click", function () {
     selectAlgorithm2("removeRandomWall");
+  });
+
+document
+  .getElementById("playPauseButton")
+  .addEventListener("click", function () {
+    if (playing) {
+      noLoop(); // Pause the sketch
+    } else {
+      loop(); // Resume the sketch
+    }
+    playing = !playing; // Toggle the playing state
   });

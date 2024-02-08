@@ -77,6 +77,7 @@ function removeRandomWall() {
       removeWalls(a, b);
     }
   }
+  selectedAlgorithm2 = null;
 }
 
 // --------------------
@@ -127,20 +128,35 @@ function showCell(cell) {
   }
 }
 
+function highlightRemoval(cell) {
+  highlightTracker.push({ cell: cell, time: millis() });
+}
+
+// Updates and renders the highlights, fading them over time
+function updateAndRenderHighlights() {
+  let currentTime = millis();
+  // Filter highlights to remove any that are older than shadingTime seconds
+  highlightTracker = highlightTracker.filter(
+    (h) => currentTime - h.time < shadingTime
+  );
+
+  highlightTracker.forEach((h) => {
+    let elapsedTime = currentTime - h.time;
+    let alpha = map(elapsedTime, 0, shadingTime, 255, 0); // Calculate fading effect
+    var x = h.cell.j * cellSize;
+    var y = h.cell.i * cellSize;
+    noStroke();
+    fill(255, 0, 0, alpha);
+    rect(x, y, cellSize, cellSize);
+  });
+}
+
 // Highlight the current cell.
 function highlight(cell) {
   var x = cell.j * cellSize;
   var y = cell.i * cellSize;
   noStroke();
   fill(0, 0, 255, 100);
-  rect(x, y, cellSize, cellSize);
-}
-
-function highlightRemoval(cell) {
-  var x = cell.j * cellSize;
-  var y = cell.i * cellSize;
-  noStroke();
-  fill(255, 0, 0, 100);
   rect(x, y, cellSize, cellSize);
 }
 
