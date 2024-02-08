@@ -58,7 +58,7 @@ function removeRandomWall() {
 
   // TO DO: Add a counter to determine if all the walls have been removed and no possible walls can be found
   // While a wall isn't found
-  while (!found) {
+  for (i = 0; i < rows * columns && !found; i++) {
     // Choose a random Cell
     let r = floor(random(0, columns * rows - 1));
     let a = grid[r];
