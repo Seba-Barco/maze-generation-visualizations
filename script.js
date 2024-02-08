@@ -1,9 +1,10 @@
 // I want to generate the maze based on a seed
 let selectedAlgorithm = null;
+let selectedAlgorithm2 = null;
 
 function setup() {
   // Grid creation. Important: i --> vertical axis. j --> horizontal axis
-  createCanvas(columns * cellSize, rows * cellSize);
+  createCanvas(columns * cellSize +1, rows * cellSize +1);
   for (i = 0; i < rows; i++) {
     for (j = 0; j < columns; j++) {
       var cell = new Cell(i, j);
@@ -21,6 +22,10 @@ function draw() {
     showCell(grid[k]);
   }
 
+  if (selectedAlgorithm2 === "removeRandomWall") {
+    removeRandomWall();
+  }
+
   if (!mazeComplete) {
     if (selectedAlgorithm === "randomizedDFS") {
       randomizedDepthFirstSearch();
@@ -33,7 +38,7 @@ function draw() {
     } else if (selectedAlgorithm === "growingTreeRandom") {
       growingTreeRandom();
       // Clear Grid Option
-    }  else if (selectedAlgorithm === "clearGrid") {
+    } else if (selectedAlgorithm === "clearGrid") {
       clearGrid();
     }
   }
@@ -64,17 +69,23 @@ document
     selectAlgorithm("growingTreeLast");
   });
 
-  document
+document
   .getElementById("growingTreeRandomButton")
   .addEventListener("click", function () {
     selectAlgorithm("growingTreeRandom");
   });
 
-  // Clear Grid Button
+// Clear Grid Button
 
-  document
+document
   .getElementById("clearGridButton")
   .addEventListener("click", function () {
     selectAlgorithm("clearGrid");
   });
-  
+
+// Remove Random Wall Button
+document
+  .getElementById("removeRandomWallButton")
+  .addEventListener("click", function () {
+    selectAlgorithm2("removeRandomWall");
+  });

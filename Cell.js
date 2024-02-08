@@ -7,6 +7,7 @@ function Cell(i, j) {
   this.walls = [true, true, true, true];
   this.visited = false;
   this.inStack = false;
+  this.solution = false;
 
   this.getTopNeighbor = function () {
     return grid[index(i - 1, j)];
@@ -31,7 +32,7 @@ function Cell(i, j) {
     ];
   };
 
-  this.getRandomNeighbor = function () {
+  this.getUnvisitedRandomNeighbor = function () {
     let neighbors = this.getNeighbors();
     let notVisited = [];
     let ind;

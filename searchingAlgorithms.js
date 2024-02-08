@@ -18,7 +18,7 @@ function randomizedDepthFirstSearch() {
   highlight(current);
   // Step 2
   // Step 2.1 & 2.1.1
-  let next = current.getRandomNeighbor();
+  let next = current.getUnvisitedRandomNeighbor();
 
   if (next) {
     //next.visited = true;
@@ -69,7 +69,7 @@ function huntAndKill() {
   // Choose a Starting location (in setup)
   current.visited = true;
   highlight(current);
-  let next = current.getRandomNeighbor();
+  let next = current.getUnvisitedRandomNeighbor();
   // Perform a random walk, carving passages to unvisited neighbors,
   // until the current cell has no unvisited neighbors
   if (next) {
@@ -91,8 +91,8 @@ function growingTreeLast() {
   current.visited = true;
   highlight(current);
 
-  if (current.getRandomNeighbor()) {
-    let neighbor = current.getRandomNeighbor();
+  if (current.getUnvisitedRandomNeighbor()) {
+    let neighbor = current.getUnvisitedRandomNeighbor();
     removeWalls(current, neighbor);
     stack.push(neighbor);
     neighbor.inStack = true;
@@ -112,8 +112,8 @@ function growingTreeRandom() {
   current.visited = true;
   highlight(current);
 
-  if (current.getRandomNeighbor()) {
-    neighbor = current.getRandomNeighbor();
+  if (current.getUnvisitedRandomNeighbor()) {
+    neighbor = current.getUnvisitedRandomNeighbor();
     removeWalls(current, neighbor);
     stack.push(neighbor);
     neighbor.inStack = true;
@@ -129,4 +129,14 @@ function growingTreeRandom() {
   if (stack.length == 0) {
     mazeComplete = true;
   }
+}
+
+// Implementation of A* Algorithm
+function solve() {
+  let start = grid[0];
+  let goal = grid[index()]
+  let open = [];
+  let closed = [];
+
+
 }

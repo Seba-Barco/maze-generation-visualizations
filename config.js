@@ -1,14 +1,14 @@
 // Grid
-var columns = 15;
-var rows = 15;
-var cellSize = 40;
+var columns = 30;
+var rows = 30;
+var cellSize = 20;
 var grid = [];
 
 // Cell
-var top = 0;
-var right = 1;
-var bottom = 2;
-var left = 3;
+var topWall = 0;
+var rightWall = 1;
+var bottomWall = 2;
+var leftWall = 3;
 var current;
 var stack = [];
 
