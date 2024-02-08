@@ -52,30 +52,30 @@ function checkWalls(a, b) {
   return foundWall;
 }
 
-function removeRandomWall() {
-  let found = false;
-  let i;
-
-  // TO DO: Add a counter to determine if all the walls have been removed and no possible walls can be found
-  // While a wall isn't found
-  for (i = 0; i < rows * columns && !found; i++) {
-    // Choose a random Cell
-    let r = floor(random(0, columns * rows - 1));
-    let a = grid[r];
-
-    // Get it's neighbors (only neighbors that have walls to remove)
-    let neighbors = a.getNeighbors();
-    neighbors = neighbors.filter((neighbor) => neighbor !== undefined);
-    neighbors = neighbors.filter((neighbor) => checkWalls(a, neighbor));
-
-    // From the cells that are left, get a random one and remove the wall
-    if (neighbors.length > 0) {
-      found = true;
-      let b = neighbors[floor(random(0, neighbors.length))];
-      highlightRemoval(a);
-      highlightRemoval(b);
-      removeWalls(a, b);
+function getAvailableWalls() {
+  for (let i = 0; i < grid.length; i++) {
+    let a = grid[i];
+    let b = grid[i].getRightNeighbor();
+    let c = grid[i].getBottomNeighbor();
+    if (b && checkWalls(a, b)) {
+      availableWalls.push([a, b]);
     }
+    if (c && checkWalls(a, c)) {
+      availableWalls.push([a, c]);
+    }
+  }
+  console.log(availableWalls);
+}
+
+function removeRandomWall() {
+  if (availableWalls.length > 0) {
+    let r = floor(random(0, availableWalls.length));
+    let a = availableWalls[r][0];
+    let b = availableWalls[r][1];
+    removeWalls(a, b);
+    availableWalls.splice(r,1);
+    highlightRemoval(a);
+    highlightRemoval(b);
   }
   selectedAlgorithm2 = null;
 }

@@ -2,6 +2,7 @@
 var selectedAlgorithm = null;
 var selectedAlgorithm2 = null;
 let playing = true;
+let wallsFetched = false;
 
 function setup() {
   // Grid creation. Important: i --> vertical axis. j --> horizontal axis
@@ -12,6 +13,10 @@ function setup() {
       grid.push(cell);
     }
   }
+  wallRemovalChecked = Array.from(
+    { length: rows * columns },
+    (_, index) => index
+  );
   // This will be the selected cell to start
   current = grid[0];
   //frameRate(5);
@@ -42,7 +47,13 @@ function draw() {
       clearGrid();
     }
     selectedAlgorithm2 = null;
+    wallsFetched = false;
   } else {
+    if (!wallsFetched) {
+      getAvailableWalls();
+      wallsFetched = true;
+    }
+
     // Only remove walls if the maze is complete
     if (selectedAlgorithm2 === "removeRandomWall") {
       removeRandomWall();
