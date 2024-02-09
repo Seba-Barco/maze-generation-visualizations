@@ -13,19 +13,15 @@ function setup() {
       grid.push(cell);
     }
   }
-  wallRemovalChecked = Array.from(
-    { length: rows * columns },
-    (_, index) => index
-  );
   // This will be the selected cell to start
-  current = grid[0];
-  //frameRate(5);
+  //current = grid[startingCell];
+  frameRate(45);
 }
 
 function draw() {
   background(51);
 
-  updateAndRenderHighlights();
+  updateAndRenderFading();
 
   for (var k = 0; k < grid.length; k++) {
     showCell(grid[k]);

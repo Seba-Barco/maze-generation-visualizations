@@ -64,7 +64,6 @@ function getAvailableWalls() {
       availableWalls.push([a, c]);
     }
   }
-  console.log(availableWalls);
 }
 
 function removeRandomWall() {
@@ -73,9 +72,9 @@ function removeRandomWall() {
     let a = availableWalls[r][0];
     let b = availableWalls[r][1];
     removeWalls(a, b);
-    availableWalls.splice(r,1);
-    highlightRemoval(a);
-    highlightRemoval(b);
+    availableWalls.splice(r, 1);
+    fading(a);
+    fading(b);
   }
   selectedAlgorithm2 = null;
 }
@@ -97,11 +96,25 @@ function index(i, j) {
 // Rendering Logic
 // --------------------
 
+// It's important to render the rectangles first, to show the wall lines with full opacity
 function showCell(cell) {
   var x = cell.j * cellSize;
   var y = cell.i * cellSize;
-  stroke(255);
 
+  // Paint the visited cells.
+  if (cell.inStack) {
+    noStroke();
+    // Paint white
+    fill(255, 255, 255, 100);
+    rect(x, y, cellSize, cellSize);
+  } else if (cell.visited) {
+    noStroke();
+    // Paint cyan
+    fill(0, 255, 255, 100);
+    rect(x, y, cellSize, cellSize);
+  }
+
+  stroke(255);
   // Draw the border lines for the cells
   if (cell.walls[topWall]) {
     line(x, y, x + cellSize, y);
@@ -115,38 +128,28 @@ function showCell(cell) {
   if (cell.walls[leftWall]) {
     line(x, y + cellSize, x, y);
   }
-
-  // Paint the visited cells.
-  if (cell.inStack) {
-    noStroke();
-    fill(255, 255, 255, 100);
-    rect(x, y, cellSize, cellSize);
-  } else if (cell.visited) {
-    noStroke();
-    fill(0, 255, 255, 100);
-    rect(x, y, cellSize, cellSize);
-  }
 }
 
-function highlightRemoval(cell) {
-  highlightTracker.push({ cell: cell, time: millis() });
+function fading(cell) {
+  fadingTracker.push({ cell: cell, time: millis() });
 }
 
 // Updates and renders the highlights, fading them over time
-function updateAndRenderHighlights() {
+function updateAndRenderFading() {
   let currentTime = millis();
   // Filter highlights to remove any that are older than shadingTime seconds
-  highlightTracker = highlightTracker.filter(
+  fadingTracker = fadingTracker.filter(
     (h) => currentTime - h.time < shadingTime
   );
 
-  highlightTracker.forEach((h) => {
+  fadingTracker.forEach((h) => {
     let elapsedTime = currentTime - h.time;
     let alpha = map(elapsedTime, 0, shadingTime, 255, 0); // Calculate fading effect
     var x = h.cell.j * cellSize;
     var y = h.cell.i * cellSize;
     noStroke();
-    fill(255, 0, 0, alpha);
+    // Paint white
+    fill(255, 255, 255, alpha);
     rect(x, y, cellSize, cellSize);
   });
 }
@@ -156,8 +159,10 @@ function highlight(cell) {
   var x = cell.j * cellSize;
   var y = cell.i * cellSize;
   noStroke();
-  fill(0, 0, 255, 100);
+  // Yellow
+  fill(255, 237, 13, 255);
   rect(x, y, cellSize, cellSize);
+  fading(cell);
 }
 
 function clearGrid() {
@@ -167,10 +172,11 @@ function clearGrid() {
     grid[i].inStack = false;
     grid[i].walls = [true, true, true, true];
   }
-  current = grid[0];
+  current = grid[startingCell];
   mazeComplete = false;
   stack = [];
   indiceHK = 0;
+  fadingTracker = [];
 }
 
 // --------------------
