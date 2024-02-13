@@ -7,7 +7,12 @@ function Cell(i, j) {
   this.walls = [true, true, true, true];
   this.visited = false;
   this.inStack = false;
+  this.explored = false;
   this.solution = false;
+  this.parent = 0;
+  this.gCost = 0;
+  this.hCost = 0;
+  this.fCost = 999999;
 
   this.getTopNeighbor = function () {
     return grid[index(i - 1, j)];

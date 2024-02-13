@@ -1,7 +1,7 @@
 // Grid
-var columns = 30;
-var rows = 30;
-var cellSize = 25;
+var columns = 15;
+var rows = 15;
+var cellSize = 40;
 var grid = [];
 var startingCell = 0;
 var shadingTime = 1200;

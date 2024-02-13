@@ -111,10 +111,76 @@ function growingTreeRandom() {
   }
 }
 
-// Implementation of A* Algorithm
+var openList = [];
+var closedList = [];
+var goalFound = false;
+var neighbors = [];
+var drawPath = false;
+
 function solve() {
-  let start = grid[0];
-  let goal = grid[index()];
-  let open = [];
-  let closed = [];
+  if (openList.length == 0) {
+    // Find a way to fix next 2 lines out of this code
+    var startSolveCell = grid[0];
+    var endSolveCell = grid[rows * columns - 1];
+    startSolveCell.fCost = 0;
+    openList.push(startSolveCell);
+  }
+
+  while (!goalFound) {
+    current = getLowestFCost(openList);
+    // Remove this
+    current.explored = true;
+    openList.splice(openList.indexOf(current), 1);
+    closedList.push(current);
+
+    if (current === endSolveCell) {
+      goalFound = true;
+      drawPath = true;
+    }
+    // get all available current's neighbors
+    neighbors = current.getNeighbors();
+    neighbors = neighbors.filter(
+      (neighbor) =>
+        neighbor !== undefined &&
+        !checkWalls(current, neighbor) &&
+        !closedList.includes(neighbor)
+    );
+
+    // For each neighbor, set the parent, and calculate all costs
+    for (let i = 0; i < neighbors.length; i++) {
+      let tempGScore = current.gCost + getGScore(current, neighbors[i]);
+      let tempHScore = getHScore(neighbors[i], endSolveCell);
+      let tempFScore = tempGScore + tempHScore;
+      if (!openList.includes(neighbors[i]) || tempFScore < neighbors[i].fCost) {
+        neighbors[i].gCost = tempGScore;
+        neighbors[i].hCost = tempHScore;
+        neighbors[i].fCost = tempFScore;
+        neighbors[i].parent = index(current.i, current.j);
+
+        if (!openList.includes(neighbors[i])) {
+          openList.push(neighbors[i]);
+        }
+      }
+    }
+  }
+
+  // Draw the solution path
+  if (goalFound && drawPath) {
+    current = grid[rows * columns - 1];
+    while (current != grid[0]) {
+      current.solution = true;
+      current = grid[current.parent];
+    }
+    current.solution = true;
+    drawPath = false;
+  }
+
+  //current = grid[rows * columns - 1];
+  /*if (goalFound && drawPath) {
+    current.solution = true;
+    current = grid[current.parent];
+    if (current == grid[0]) {
+      drawPath = false;
+    }
+  }*/
 }

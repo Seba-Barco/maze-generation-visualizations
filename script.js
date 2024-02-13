@@ -53,6 +53,8 @@ function draw() {
     // Only remove walls if the maze is complete
     if (selectedAlgorithm2 === "removeRandomWall") {
       removeRandomWall();
+    } else if (selectedAlgorithm2 === "solve"){
+      solve();
     }
   }
 }
@@ -113,3 +115,10 @@ document
     }
     playing = !playing; // Toggle the playing state
   });
+
+  // Solve
+document
+.getElementById("solveButton")
+.addEventListener("click", function () {
+  selectAlgorithm2("solve");
+});
